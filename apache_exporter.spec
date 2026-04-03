@@ -10,8 +10,8 @@ License: MIT
 URL:     https://github.com/Lusitaniae/apache_exporter
 
 Source0: https://github.com/Lusitaniae/apache_exporter/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
-Source1: autogen_%{name}.unit
-Source2: autogen_%{name}.default
+Source1: %{name}.unit
+Source2: %{name}.default
 
 %{?systemd_requires}
 Requires(pre): shadow-utils
