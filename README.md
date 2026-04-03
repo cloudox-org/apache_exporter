@@ -1,4 +1,4 @@
-# Alertmanager
+# Apache Exporter
 
 [![RPM builds for EL8, EL9 and EL10](https://github.com/cloudox-org/apache_exporter/actions/workflows/rpm-build.yml/badge.svg?branch=main)](https://github.com/cloudox-org/apache_exporter/actions/workflows/rpm-build.yml)
 
