@@ -2,25 +2,22 @@
 %global user prometheus
 %global group prometheus
 
-Name: alertmanager
-Version: 0.31.1
+Name: apache_exporter
+Version: 1.0.12
 Release: 1%{?dist}
-Summary: Prometheus Alertmanager.
-License: ASL 2.0
-URL:     https://github.com/prometheus/alertmanager
+Summary: Prometheus exporter Apache webserver mertics.
+License: MIT
+URL:     https://github.com/Lusitaniae/apache_exporter
 
-Source0: https://github.com/prometheus/alertmanager/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
-Source1: %{name}.unit
-Source2: %{name}.default
+Source0: https://github.com/Lusitaniae/apache_exporter/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
+Source1: autogen_%{name}.unit
+Source2: autogen_%{name}.default
 
 %{?systemd_requires}
 Requires(pre): shadow-utils
 
 %description
-The Alertmanager handles alerts sent by client applications such as the
-Prometheus server. It takes care of deduplicating, grouping, and routing them to
-the correct receiver integration such as email, PagerDuty, or OpsGenie. It also
-takes care of silencing and inhibition of alerts.
+Prometheus exporter for Apache mod_status statistics.
 
 %prep
 %setup -q -n %{name}-%{version}.linux-amd64
@@ -33,8 +30,6 @@ mkdir -vp %{buildroot}%{_sharedstatedir}/prometheus
 install -D -m 755 %{name} %{buildroot}%{_bindir}/%{name}
 install -D -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/default/%{name}
 install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/%{name}.service
-install -D -m 755 amtool %{buildroot}%{_bindir}/amtool
-install -D -m 640 alertmanager.yml %{buildroot}%{_sysconfdir}/prometheus/alertmanager.yml
 
 %pre
 getent group prometheus >/dev/null || groupadd -r prometheus
@@ -57,10 +52,7 @@ exit 0
 %config(noreplace) %{_sysconfdir}/default/%{name}
 %dir %attr(755, %{user}, %{group}) %{_sharedstatedir}/prometheus
 %{_unitdir}/%{name}.service
-%attr(755, -, -)%{_bindir}/amtool
-%config(noreplace) %attr(640, -, %{group})%{_sysconfdir}/prometheus/alertmanager.yml
 
 %changelog
-* Wed Feb 18 2026 Ivan Garcia <igarcia@cloudox.org> - 0.31.1
-- Update to Alertmanager 0.31.1
-- Initial packaging for the 0.31.1 branch
+* Tue Mar 31 2026 Ivan Garcia <igarcia@cloudox.org> - 1.0.12
+- Initial packaging for the 1.0.12 branch
