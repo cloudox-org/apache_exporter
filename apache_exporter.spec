@@ -3,7 +3,7 @@
 %global group prometheus
 
 Name: apache_exporter
-Version: 1.0.12
+Version: 1.1.1
 Release: 1%{?dist}
 Summary: Prometheus exporter Apache webserver mertics.
 License: MIT
@@ -54,5 +54,8 @@ exit 0
 %{_unitdir}/%{name}.service
 
 %changelog
+* Thu Jul 23 2026 Ivan Garcia <igarcia@cloudox.org> - 1.1.1
+- Initial packaging for the 1.1.1 branch
+- Bump Go toolchain to 1.25.11 to resolve stdlib CVEs (v1.1.1)
 * Tue Mar 31 2026 Ivan Garcia <igarcia@cloudox.org> - 1.0.12
 - Initial packaging for the 1.0.12 branch
